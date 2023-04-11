@@ -9,7 +9,8 @@ app.use(express.json());
 app.use(cors());
 
 // DataBase Connection
-const dbURL = "mongodb+srv://dannyg:bubbadb@cluster0.pawnxue.mongodb.net/capstone";
+const dbURL = "mongodb+srv://danny:tuIokPtX3NWlmxyh@cluster0.mrtefkh.mongodb.net/capstone";
+
 mongoose.connect(dbURL,{
     useNewURLParser: true,
     useUnifiedTopology: true})
