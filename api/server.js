@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// DataBase Connection
+// Establish DataBase Connection
 const dbURL = "mongodb+srv://danny:tuIokPtX3NWlmxyh@cluster0.mrtefkh.mongodb.net/capstone";
 
 mongoose.connect(dbURL,{
