@@ -1,0 +1,29 @@
+### Get Users
+GET http://localhost:3001/users
+
+### Create New User
+POST http://localhost:3001/users/new
+Content-Type: application/json
+
+{
+    "username": "Danny",
+    "password": "DannysAmazingPassword"
+}
+
+### Get Specific User by userID
+GET http://localhost:3001/users/64361c5ae5079b3014302b8f
+
+### GET Recipes by userID
+GET http://localhost:3001/users/64361c5ae5079b3014302b8f/recipes
+
+### Add New Recipe to User 
+POST http://localhost:3001/users/64361c5ae5079b3014302b8f/recipes/new
+Content-Type: application/json
+
+{
+    "dishName": "Danny's Cold Brew",
+    "servingSize": "1",
+    "ingredients": ["coffee", "ball jar", "water"],
+    "directions": ["grind coffee", "pour water", "wait"],
+    "imageURL": "https://insanelygoodrecipes.com/wp-content/uploads/2020/07/Cup-Of-Creamy-Coffee.png"
+}

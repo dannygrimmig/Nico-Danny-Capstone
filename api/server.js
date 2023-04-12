@@ -21,10 +21,58 @@ mongoose.connect(dbURL,{
 
 // USER SCHEMA
 const User = require("./Models/User");
+const Recipe = require("./Models/Recipe");
 
+// View Users
 app.get("/users", async (req,res) => {
     const users = await User.find();
     res.json(users);
-})
+});
+
+// Create User
+app.post("/users/new", async (req,res) => {
+    const newUser = new User(
+        {
+            username: req.body.username,
+            password: req.body.password
+        }
+    );
+    newUser.save();
+    res.json(newUser);
+});
+
+// Get User
+app.get("/users/:userID", async (req,res) => {
+    const user = await User.findById(req.params.userID);
+    res.json(user);
+});
+
+
+// View User Recipes
+app.get("/users/:userID/recipes", async (req,res) => {
+    const user = await User.findById(req.params.userID);
+    const userRecipes = user.recipes;
+    res.json(userRecipes);
+});
+
+// Add New Recipe to User
+app.post("/users/:userID/recipes/new", async (req,res) => {
+    const user = await User.findById(req.params.userID);
+    const userRecipes = user.recipes;
+    const newRecipe = new Recipe(
+        {
+            chef: user.username,
+            dishName: req.body.dishName,
+            servingSize: req.body.servingSize,
+            ingredients: req.body.ingredients,
+            directions: req.body.directions,
+            imageURL: req.body.imageURL
+        }
+    );
+    newRecipe.save(); 
+    userRecipes.push(newRecipe);
+    user.save();
+    res.json(newRecipe);
+});
 
 app.listen("3001", console.log("Server Starting on Port 3001"));
