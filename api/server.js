@@ -19,7 +19,7 @@ mongoose.connect(dbURL,{
     .catch(console.error);
 
 
-// USER SCHEMA
+// SCHEMAS
 const User = require("./Models/User");
 const Recipe = require("./Models/Recipe");
 
@@ -73,6 +73,28 @@ app.post("/users/:userID/recipes/new", async (req,res) => {
     userRecipes.push(newRecipe);
     user.save();
     res.json(newRecipe);
+});
+
+// Delete Recipe from User
+app.delete("/users/:userID/recipes/delete/:recipeID", async (req,res) => {
+    const user = await User.findById(req.params.userID);
+    const userRecipes = user.recipes;
+    for(var i = 0; i < userRecipes.length; i++){
+        if(userRecipes[i]._id == req.params.recipeID){
+            var deleteRecipe = userRecipes.splice(i,1);
+        }
+    }
+    user.recipes = userRecipes;
+    user.save();
+
+    const recipe = await Recipe.findByIdAndDelete(req.params.recipeID);
+    res.json(deleteRecipe);
+});
+
+// View all recipes
+app.get("/recipes", async (req,res) => {
+    const recipes = await Recipe.find();
+    res.json(recipes);
 });
 
 app.listen("3001", console.log("Server Starting on Port 3001"));
