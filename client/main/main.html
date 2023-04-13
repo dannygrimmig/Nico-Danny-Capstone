@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <title>FoodFeed</title>
+    <head>
+        <link rel="stylesheet" href="../main/main.css">
+    </head>
+    <body>
+        <div id ="main-container">
+            <div id = "profile-info">
+                <div id = "name">
+
+                </div>
+
+                <div id = "picture">
+                    <img id = "profile-picture" src="" alt="">
+                </div>
+
+            </div>
+
+            <div id = "toggle-feed">
+                <div class = "toggle">
+                    <button id = "personal" onclick = "toggle('personal')">Personal</button>
+                </div>
+               
+               <div class = "toggle">
+                <button id = "feed" onclick = "toggle('feed')">Feed</button>
+               </div>
+               
+            </div>
+
+            <div id = "display-recipes">  <!--Either personal or public-->
+                <div id = "recipe1"></div>
+                <div id = "recipe2"></div>
+                <div id = "recipe3"></div>
+            </div>
+        </div>
+    </body>
+    <script src="../main/main.js"></script>
+</html>
