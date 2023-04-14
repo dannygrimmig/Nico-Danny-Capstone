@@ -21,7 +21,7 @@ POST http://localhost:3001/users/64361d7cd55f42890bfc8408/recipes/new
 Content-Type: application/json
 
 {
-    "dishName": "Dannys's Cold Brew 2",
+    "dishName": "Dannys's Cold Brew 10",
     "servingSize": "1",
     "ingredients": ["coffee", "ball jar", "water"],
     "directions": ["grind coffee", "pour water", "wait"],
