@@ -5,13 +5,34 @@ let html = document.getElementById("html");
 let initial = true;
 let currentRecipe = "";
 
+display_user();
+
 setInterval(popup_open, 1);//Check if popup is open or closed
 
 
 if(initial)
 {
     getPersonalRecipes();
+    
 }
+
+function display_user()
+{
+    var request = new XMLHttpRequest();
+    var requestURL = 'http://localhost:3001/users/'+id+'';
+    request.open('GET', requestURL);
+    request.responseType = 'json';
+    request.send();
+    request.onload = function(){
+        var user = request.response;
+        console.log(user.username);
+        let name = document.getElementById("name");
+        name.innerHTML = user.username;
+    }
+
+  
+}
+
 
 
 function toggle(button_id)
@@ -28,7 +49,7 @@ function toggle(button_id)
 
     if(button_id === "personal")
     {
-        display_area.style.backgroundColor = "black";
+        display_area.style.backgroundColor = "rgb(237, 241, 243)";
         feed.style.opacity = .5;
         feed.style.textDecoration = "none";
         display_area.innerHTML = "";
@@ -36,7 +57,7 @@ function toggle(button_id)
     }
     else //if in feed
     {
-        display_area.style.backgroundColor = "white";
+        display_area.style.backgroundColor = "rgb(237, 241, 243)";
         personal.style.opacity = .5;
         personal.style.textDecoration = "none";
         display_area.innerHTML = "";
@@ -96,7 +117,7 @@ function displayPersonalRecipes(recipes_array)
         picture.setAttribute("src", image);
 
         let button = document.createElement('button');
-        button.setAttribute("onclick", "display_recipe('" + image + "')");
+        button.setAttribute("onclick", "display_recipe(\""+ chef + "\",\""+ dishName + "\",\""+ servingSize + "\",\""+ directions_array + "\",\""+ ingredients_array + "\",\""+ image + "\")"); //,\""+ directions_array + "\",\""+ ingredients_array + "\"
         button.classList.add("recipe_button");
 
         recipeDiv.innerHTML = dishName;
@@ -108,25 +129,122 @@ function displayPersonalRecipes(recipes_array)
 }
 
 
-function display_recipe(image)
+function display_recipe(chef, dishName, servingSize, directions_array, ingredients_array,image) //, directions_array ,ingredients_array,
 {
-    let popup = document.createElement('div');
-    popup.classList.add("popup_recipe");
+    if(currentRecipe === "")
+    {
+        let popup = document.createElement('div');
+        popup.classList.add("popup_recipe");
 
-    let picture = document.createElement('img');
-    picture.setAttribute("src", image);
+        //right side of popup
+        let rightSide = document.createElement('div');
+        rightSide.classList.add("rightSide");
 
-    popup.appendChild(picture);
-    display_area.prepend(popup);
 
-    currentRecipe = popup;
+        //Directions
+        let direct_container = document.createElement('div');
+        direct_container.classList.add("direct_container");
+
+        let directions_header = document.createElement('h2');
+        directions_header.classList.add("directions_header");
+        directions_header.innerHTML = "PREPARATION";
+
+        let directions = document.createElement('p');
+        directions.classList.add("directions");
+        directions.innerHTML = directions_array;
+        
+        direct_container.appendChild(directions_header);
+        direct_container.appendChild(directions);
+
+
+        //Ingredients
+        let ingre_container = document.createElement('div');
+        ingre_container.classList.add("ingre_container");
+
+        let ingredients_header = document.createElement('h2');
+        ingredients_header.classList.add("ingredients_header");
+        ingredients_header.innerHTML = "INGREDIENTS";
+
+        let ingredients = document.createElement('p');
+        ingredients.classList.add("ingredients");
+        ingredients.innerHTML = ingredients_array;
+
+        //Serving amount
+        let amount = document.createElement('div');
+        amount.classList.add("serving");
+        let serving = document.createElement('p');
+        serving.innerHTML = "Serving size: " + servingSize;
+        amount.appendChild(serving);
+
+        ingre_container.appendChild(ingredients_header);
+        ingre_container.appendChild(amount);
+        ingre_container.appendChild(ingredients);
+
+
+        rightSide.appendChild(ingre_container);
+        rightSide.appendChild(direct_container);
+
+
+        //Left side of popup
+        let leftSide = document.createElement('div');
+        leftSide.classList.add("leftSide");
+
+
+        let photo = document.createElement('div');
+        photo.classList.add("photo");
+
+        let picture = document.createElement('img');
+        picture.setAttribute("src", image);
+
+        photo.appendChild(picture);
+
+
+        let description = document.createElement('div');
+        description.classList.add("description");
+
+
+        let name = document.createElement('div');
+        name.classList.add("dishname");
+
+        let foodname = document.createElement('h1');
+        foodname.innerHTML = dishName;
+        name.appendChild(foodname);
+
+
+        let person = document.createElement('div');
+        person.classList.add("chef");
+        let cook = document.createElement('p');
+        cook.innerHTML = "Recipe from " + chef;
+        person.appendChild(cook);
+
+        description.appendChild(name);
+        description.appendChild(person);
+    
+
+
+
+        leftSide.appendChild(photo);
+        leftSide.appendChild(description);
+
+
+        //Combine on popup
+        popup.appendChild(leftSide);
+        popup.appendChild(rightSide);
+        display_area.prepend(popup);
+
+
+        // document.getElementsByClassName("recipe").style.visibility = "hidden";
+        currentRecipe = popup;
+    }
 }
 
 function hideRecipe()
 {
+    // document.getElementsByClassName("recipe").style.visibility = "visible";
     currentRecipe.style.visibility = "hidden";
     currentRecipe ="";
 }
+
 
 function popup_open()
 {
