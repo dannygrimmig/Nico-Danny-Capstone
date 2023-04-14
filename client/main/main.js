@@ -1,12 +1,18 @@
 let id  = "64361d7cd55f42890bfc8408";
 let display_area = document.getElementById("display-recipes");
-let html = document.getElementById("");
+let body = document.getElementById("body");
+let html = document.getElementById("html");
 let initial = true;
+let currentRecipe = "";
+
+setInterval(popup_open, 1);//Check if popup is open or closed
+
 
 if(initial)
 {
     getPersonalRecipes();
 }
+
 
 function toggle(button_id)
 {
@@ -90,7 +96,7 @@ function displayPersonalRecipes(recipes_array)
         picture.setAttribute("src", image);
 
         let button = document.createElement('button');
-        button.setAttribute("onclick", "display_recipe()");
+        button.setAttribute("onclick", "display_recipe('" + image + "')");
         button.classList.add("recipe_button");
 
         recipeDiv.innerHTML = dishName;
@@ -102,14 +108,34 @@ function displayPersonalRecipes(recipes_array)
 }
 
 
-function display_recipe()
+function display_recipe(image)
 {
     let popup = document.createElement('div');
-    let page = document.getElementById("html");
     popup.classList.add("popup_recipe");
-    
-    page.appendChild(popup)
 
-    console.log("hey");
+    let picture = document.createElement('img');
+    picture.setAttribute("src", image);
 
+    popup.appendChild(picture);
+    display_area.prepend(popup);
+
+    currentRecipe = popup;
+}
+
+function hideRecipe()
+{
+    currentRecipe.style.visibility = "hidden";
+    currentRecipe ="";
+}
+
+function popup_open()
+{
+    if(currentRecipe != "")
+    {
+        body.setAttribute("onclick",  "hideRecipe()");
+    }
+    else
+    {
+        body.removeAttribute("onclick",  "hideRecipe()");
+    }
 }
