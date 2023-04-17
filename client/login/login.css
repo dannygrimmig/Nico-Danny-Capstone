@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: orange;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+}
+
+.left{
+    background-color: whitesmoke;
+    width: 500px;
+    padding: 100px 50px 25px 50px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Log In / Sign Up */
+.left .log{
+    flex: 1;
+}
+.left .log h1{
+    font-size: 80px;
+}
+
+/* Username and Password */
+.left .form{
+    flex: 2;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.left .form h3{
+    font-size: 25px;
+}
+.left .form input{
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    height: 35px;
+    width: 300px;
+    border: none;
+    border-radius: 10px;
+}
+.left .form .submit{
+    display: flex;
+    justify-content: right;
+    padding-right: 100px;
+}
+.left .form .submit button{
+    background-color: white;
+    height: 45px;
+    width: 75px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+/* Switch LogIn/SignUp */
+.left .switch{
+    background-color: pink;
+    flex: 1;
+}
+
+.right{
+    background-color: steelblue;
+    flex: 1;
+}
