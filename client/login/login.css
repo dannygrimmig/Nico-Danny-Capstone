@@ -4,14 +4,13 @@
 }
 
 body{
-    background-color: orange;
     font-family: 'Poppins', sans-serif;
     display: flex;
 }
 
 .left{
     background-color: whitesmoke;
-    width: 400px;
+    width: 500px;
     padding: 100px 50px 25px 50px;
 
     display: flex;
@@ -96,6 +95,7 @@ body{
 }
 
 .right{
-    background-color: steelblue;
+    background-color: whitesmoke;
     flex: 1;
+    overflow: hidden;
 }
