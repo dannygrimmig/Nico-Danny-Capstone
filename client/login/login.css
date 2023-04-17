@@ -11,7 +11,7 @@ body{
 
 .left{
     background-color: whitesmoke;
-    width: 500px;
+    width: 400px;
     padding: 100px 50px 25px 50px;
 
     display: flex;
@@ -25,6 +25,7 @@ body{
 }
 .left .log h1{
     font-size: 80px;
+    cursor: default;
 }
 
 /* Username and Password */
@@ -37,32 +38,61 @@ body{
 }
 .left .form h3{
     font-size: 25px;
+    cursor: default;
 }
 .left .form input{
     font-family: 'Poppins', sans-serif;
+    background-color: steelblue;
+    color: white;
     padding: 10px;
-    height: 35px;
+    height: 40px;
     width: 300px;
-    border: none;
+    border: 1px solid black;
     border-radius: 10px;
+    outline: none;
+    transition: all .25s;
 }
+.left .form input:hover{
+    transform: scale(1.1);
+    box-shadow: 2px 2px black;
+}
+
+
 .left .form .submit{
     display: flex;
     justify-content: right;
     padding-right: 100px;
 }
 .left .form .submit button{
+    font-family: 'Poppins', sans-serif;
     background-color: white;
     height: 45px;
     width: 75px;
     border-radius: 15px;
     border: 1px solid black;
+    transition: all .25s;
+    cursor: pointer;
+}
+.left .form .submit button:hover{
+    transform: scale(1.1);
+    box-shadow: 2px 2px black;
 }
 
 /* Switch LogIn/SignUp */
 .left .switch{
-    background-color: pink;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.left .switch p{
+    border-bottom: 1px solid black;
+    width: fit-content;
+    cursor: default;
+}
+.left .switch h4{
+    cursor: pointer;
+    color: steelblue;
 }
 
 .right{

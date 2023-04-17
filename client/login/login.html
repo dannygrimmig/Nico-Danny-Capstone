@@ -13,28 +13,29 @@
 </head>
 <body>
     <div class="left">
-        <div class="log">
-            <h1>Log In</h1>
+        <div class="log" id="log">
+            <h1 id="header">Log In</h1>
         </div>
         <div class="form">
             <div class="username">
                 <h3>Username</h3>
-                <input type="text">
+                <input type="text" id="username">
             </div>
             <div class="password">
                 <h3>Password</h3>
-                <input type="password">
+                <input type="password" id="password">
             </div>
             <div class="submit">
-                <button>Submit</button>
+                <button id="submit">Submit</button>
             </div>
         </div>
-        <div class="switch">
-            <p>Don't have an account?</p>
-            <p>Sign Up</p>
+        <div class="switch" id="switch">
+            <p id="switchP">Don't have an account?</p>
+            <h4 id="switchButton">Sign Up</h4>
         </div>
     </div>
     <div class="right"></div>
 
+    <script src="./login.js"></script>
 </body>
 </html>
