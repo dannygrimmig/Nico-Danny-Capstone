@@ -6,8 +6,8 @@ POST http://localhost:3001/users/new
 Content-Type: application/json
 
 {
-    "username": "Danny",
-    "password": "DannysAmazingPassword"
+    "username": "DannyG",
+    "password": "dgpass"
 }
 
 ### Get Specific User by userID
@@ -17,14 +17,14 @@ GET http://localhost:3001/users/643d748676ae031424fa88a4
 GET http://localhost:3001/users/64361d7cd55f42890bfc8408/recipes
 
 ### Add New Recipe to User 
-POST http://localhost:3001/users/64361d7cd55f42890bfc8408/recipes/new
+POST http://localhost:3001/users/643ea90ca8e79a1a38612acf/recipes/new
 Content-Type: application/json
 
 {
-    "dishName": "Dannys's Cold Brew 10",
+    "dishName": "Kodiak Pancakes",
     "servingSize": "1",
-    "ingredients": ["coffee", "ball jar", "water"],
-    "directions": ["grind coffee", "pour water", "wait"],
+    "ingredients": ["Kodiak Mix", "Water", "Frozen Fruit"],
+    "directions": ["Mix Water and Pancake Mix", "pour onto skilled", "cook and enjoy"],
     "imageURL": "https://insanelygoodrecipes.com/wp-content/uploads/2020/07/Cup-Of-Creamy-Coffee.png"
 }
 

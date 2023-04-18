@@ -63,6 +63,19 @@ async function logIn(){
     }
     else{
         console.log("%c * Invalid Credentials","color:red; font-weight:bold");
+        usernameInput.style.backgroundColor = "crimson";
+        passwordInput.style.backgroundColor = "crimson";
+        usernameInput.classList.add("error");
+        passwordInput.classList.add("error");
+
+        usernameInput.addEventListener("click", () => {
+            usernameInput.style.backgroundColor = "steelblue";
+            usernameInput.classList.remove("error");
+        })
+        passwordInput.addEventListener("click", () => {
+            passwordInput.style.backgroundColor = "steelblue"
+            passwordInput.classList.remove("error");
+        })
     }
 }
 
