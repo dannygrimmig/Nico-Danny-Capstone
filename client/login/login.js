@@ -1,6 +1,7 @@
 console.log("%c JavaScript","color:steelblue; font-size: 24px; text-shadow: 2px 2px black");
 
 const API_BASE = "http://localhost:3001";
+const PROFILE_BASE = "http://127.0.0.1:5500/client/main/main.html";
 
 let login = true;
 
@@ -31,7 +32,7 @@ function signUpDisplay(){
 }
 
 // Switch!
-switchBox.addEventListener("click", () => {
+switchButton.addEventListener("click", () => {
     login = !login;
     login ? logInDisplay() : signUpDisplay();
 });
@@ -56,6 +57,9 @@ async function logIn(){
     if(validated){
         console.log("%c * Valid Credentials","color:green; font-weight:bold");
         console.log(userID);
+
+        // Go To App!
+        window.location.assign(PROFILE_BASE + "?=" + userID);
     }
     else{
         console.log("%c * Invalid Credentials","color:red; font-weight:bold");
@@ -79,6 +83,9 @@ async function signUp(){
     .then(data => {
         console.log("%c * Complete","color:green; font-weight:bold");
         console.log(data._id);
+
+        // Go To App!
+        window.location.assign(PROFILE_BASE + "?=" + data._id);
     });
 }
 
