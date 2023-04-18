@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 ### Get Specific User by userID
-GET http://localhost:3001/users/64361d7cd55f42890bfc8408
+GET http://localhost:3001/users/643d748676ae031424fa88a4
 
 ### GET Recipes by userID
 GET http://localhost:3001/users/64361d7cd55f42890bfc8408/recipes

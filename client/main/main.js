@@ -1,4 +1,9 @@
-let id  = "64361d7cd55f42890bfc8408";
+// let id  = "64361d7cd55f42890bfc8408"; 
+let currURL = window.location.href; //Current URL 
+let splitURL = currURL.split("?="); //Split by Query
+let id = splitURL[1]; //User ID
+
+
 let display_area = document.getElementById("display-recipes");
 let body = document.getElementById("body");
 let html = document.getElementById("html");
