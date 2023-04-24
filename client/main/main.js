@@ -7,20 +7,27 @@ let id = splitURL[1]; //User ID
 let display_area = document.getElementById("display-recipes");
 let body = document.getElementById("body");
 let html = document.getElementById("html");
+let searchbar = document.getElementById("search-item");
 let initial = true;
 let currentRecipe = "";
+
+let toggle_screen = "";
+let all_recipes = [];
+let personal_recipes = [];
 
 display_user();
 
 setInterval(popup_open, 1);//Check if popup is open or closed
 
 
+//Gets opening screen
 if(initial)
 {
+    toggle_screen = "personal";
     getPersonalRecipes();
-    
 }
 
+//Displays the username
 function display_user()
 {
     var request = new XMLHttpRequest();
@@ -39,9 +46,10 @@ function display_user()
 }
 
 
-
+//Toggles between personal and feed pages
 function toggle(button_id)
 {
+    toggle_screen = button_id;
     initial =false;
     let button =  document.getElementById(button_id);
 
@@ -51,25 +59,29 @@ function toggle(button_id)
 
     button.style.opacity = 1;
     button.style.textDecoration = "underline";
+    button.style.textShadow = "white .3vh .2vh";
 
     if(button_id === "personal")
     {
-        display_area.style.backgroundColor = "rgb(237, 241, 243)";
+        display_area.style.backgroundColor = "#b3cee5";
         feed.style.opacity = .5;
         feed.style.textDecoration = "none";
+        feed.style.textShadow = "none"
         display_area.innerHTML = "";
         getPersonalRecipes();
     }
     else //if in feed
     {
-        display_area.style.backgroundColor = "rgb(237, 241, 243)";
+        display_area.style.backgroundColor = "#b3cee5";
         personal.style.opacity = .5;
+        personal.style.textShadow = "none"
         personal.style.textDecoration = "none";
         display_area.innerHTML = "";
         getFeedRecipes();
     }
 }
 
+//retrieves personal recipes
 function getPersonalRecipes()
 {
     var request = new XMLHttpRequest();
@@ -78,11 +90,12 @@ function getPersonalRecipes()
     request.responseType = 'json';
     request.send();
     request.onload = function(){
-        var personal_recipes = request.response;
+        personal_recipes = request.response;
         displayPersonalRecipes(personal_recipes);
     }
 }
 
+//retreives feed recipes
 function getFeedRecipes()
 {
     var request = new XMLHttpRequest();
@@ -91,12 +104,13 @@ function getFeedRecipes()
     request.responseType = 'json';
     request.send();
     request.onload = function(){
-        var all_recipes = request.response;
+        all_recipes = request.response;
         displayPersonalRecipes(all_recipes);
     }
 }
 
 
+//Called by GetPersonalRecipes, displays recipes
 function displayPersonalRecipes(recipes_array)
 {
     let chef;
@@ -118,15 +132,14 @@ function displayPersonalRecipes(recipes_array)
         let recipeDiv = document.createElement('div'); //Add Dishname
         recipeDiv.classList.add("recipe");
 
-        let picture = document.createElement('img');
-        picture.setAttribute("src", image);
-
         let button = document.createElement('button');
         button.setAttribute("onclick", "display_recipe(\""+ chef + "\",\""+ dishName + "\",\""+ servingSize + "\",\""+ directions_array + "\",\""+ ingredients_array + "\",\""+ image + "\")"); //,\""+ directions_array + "\",\""+ ingredients_array + "\"
         button.classList.add("recipe_button");
+        
+        recipeDiv.style.backgroundImage = "url(\""+ image + "\")";
 
-        recipeDiv.innerHTML = dishName;
-        button.appendChild(picture);
+
+        button.innerHTML = dishName;
         recipeDiv.appendChild(button);
         display_area.appendChild(recipeDiv);
     }
@@ -134,6 +147,7 @@ function displayPersonalRecipes(recipes_array)
 }
 
 
+//If a recipes is clicked it is displayed in a popup screen that this function creates
 function display_recipe(chef, dishName, servingSize, directions_array, ingredients_array,image) //, directions_array ,ingredients_array,
 {
     if(currentRecipe === "")
@@ -226,8 +240,6 @@ function display_recipe(chef, dishName, servingSize, directions_array, ingredien
         description.appendChild(person);
     
 
-
-
         leftSide.appendChild(photo);
         leftSide.appendChild(description);
 
@@ -238,14 +250,12 @@ function display_recipe(chef, dishName, servingSize, directions_array, ingredien
         display_area.prepend(popup);
 
 
-        // document.getElementsByClassName("recipe").style.visibility = "hidden";
         currentRecipe = popup;
     }
 }
 
 function hideRecipe()
 {
-    // document.getElementsByClassName("recipe").style.visibility = "visible";
     currentRecipe.style.visibility = "hidden";
     currentRecipe ="";
 }
@@ -255,10 +265,82 @@ function popup_open()
 {
     if(currentRecipe != "")
     {
+        disableScroll();
         body.setAttribute("onclick",  "hideRecipe()");
+
     }
     else
     {
+       enableScroll();
         body.removeAttribute("onclick",  "hideRecipe()");
     }
+}
+
+
+
+search();
+function search()
+{
+    searchbar.addEventListener('keyup', (e) => {
+        const searchString = e.target.value.toLowerCase();
+       
+            if(toggle_screen === "personal")
+            {
+                const filteredRecipes = personal_recipes.filter((recipe) => {
+                        return (
+                            recipe.dishName.toLowerCase().includes(searchString)
+                        );   //Could add style of cousine
+                });
+
+                if(filteredRecipes != [])
+                {
+                    display_area.innerHTML = "";
+                    displayPersonalRecipes(filteredRecipes);
+                }
+                console.log(filteredRecipes);
+            }
+            else //if in feed
+            {
+                const filteredRecipes = all_recipes.filter((recipe) => {
+                    return (
+                        recipe.dishName.toLowerCase().includes(searchString)
+                    );   //Could add style of cousine
+            });
+
+                if(filteredRecipes != [])
+                {
+                    display_area.innerHTML = "";
+                    displayPersonalRecipes(filteredRecipes);
+                }
+           
+            }
+    });
+}
+
+
+
+//Cannot scroll in main page while popup is open
+function disableScroll() {
+    // Get the current page scroll position in the vertical direction
+   scrollTop =
+       window.pageYOffset || document.documentElement.scrollTop;
+        
+        
+// Get the current page scroll position in the horizontal direction 
+
+ scrollLeft =
+   window.pageXOffset || document.documentElement.scrollLeft;
+   
+   
+  // if any scroll is attempted,
+ // set this to the previous value
+ window.onscroll = function() {
+  window.scrollTo(scrollLeft, scrollTop);
+ };
+}
+
+//Reenables scrolling
+function enableScroll() 
+{
+     window.onscroll = function() {};
 }
