@@ -73,6 +73,7 @@ function toggle(button_id)
         feed.style.textDecoration = "none";
         feed.style.textShadow = "none"
         display_area.innerHTML = "";
+        display_area.append(recipe_template);
         getPersonalRecipes();
     }
     else //if in feed
@@ -82,6 +83,7 @@ function toggle(button_id)
         personal.style.textShadow = "none"
         personal.style.textDecoration = "none";
         display_area.innerHTML = "";
+        display_area.append(recipe_template);
         getFeedRecipes();
     }
 }
