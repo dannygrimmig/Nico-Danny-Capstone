@@ -14,9 +14,13 @@ let currentRecipe = "";
 let toggle_screen = "";
 let all_recipes = [];
 let personal_recipes = [];
+let newImage;
+let creating = false;
+let recipe_template = document.getElementById("create_recipe");
+
 
 display_user();
-
+search();
 setInterval(popup_open, 1);//Check if popup is open or closed
 
 
@@ -60,6 +64,7 @@ function toggle(button_id)
     button.style.opacity = 1;
     button.style.textDecoration = "underline";
     button.style.textShadow = "white .3vh .2vh";
+    searchbar.value = "";
 
     if(button_id === "personal")
     {
@@ -257,28 +262,106 @@ function display_recipe(chef, dishName, servingSize, directions_array, ingredien
 function hideRecipe()
 {
     currentRecipe.style.visibility = "hidden";
-    currentRecipe ="";
+    currentRecipe = "";
 }
 
-
-function popup_open()
+                        //find (Query selector)
+function popup_open()  //Look at level of depth (onclick element target) Look at whole tree (Check for model or child of model)
 {
-    if(currentRecipe != "")
+    if(currentRecipe != "" || creating)
     {
         disableScroll();
-        body.setAttribute("onclick",  "hideRecipe()");
+        
+        if(!creating)
+        {
+            body.setAttribute("onclick",  "hideRecipe()");
+        }
 
     }
     else
     {
        enableScroll();
-        body.removeAttribute("onclick",  "hideRecipe()");
+
+       body.removeAttribute("onclick",  "hideRecipe()");
     }
 }
 
+function openCreateRecipePage()
+{
+    create_recipe.style.visibility = "visible";
+    listenforphotos();
+    creating = true;
+}
+
+function listenforphotos()
+{
+    let inputDiv = document.getElementById("photo_input-div");
+    let displayImage = document.getElementById("added_picture");
+    let imgURL = ""
+
+   
+    document.addEventListener("dragover", function(event) {
+        event.preventDefault();
+      });
+
+    inputDiv.addEventListener("drop", (e) => 
+    {
+        e.preventDefault()
+        const files = e.dataTransfer.files
+        if (files[0].type.match("image"))
+        {
+            const newImage = files[0];
+            imgURL = URL.createObjectURL(newImage);
+            displayImage.setAttribute("src", imgURL);
+        }
+    })
+}
+
+function createRecipe()
+{
+    let newChef =  document.getElementById("chef_input").value;                  
+    let newDishName = document.getElementById("dish_input").value;
+    let newServingSize = document.getElementById("serving_input").value;
+    
+    let newDirections_array = [];
+    newDirections_array[0] = document.getElementById("directions_input").value;
+    
+    let newIngredients_array = [];
+    newIngredients_array[0] = document.getElementById("ingredients_input").value;
+
+    let newDisplayImage = document.getElementById("added_picture");
+
+    let newImage = document.getElementById("added_img").value;
+
+    //let newImage = newDisplayImage.src;
+    console.log(newDishName);
+  
+    const makeRecipe = async () =>
+    {
+        let queryURL = "http://localhost:3001/users/"+id+"/recipes/new";
+        console.log("queryURL:",queryURL);
+        const recipe = await fetch(queryURL,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                dishName: newDishName,
+                servingSize: newServingSize,
+                ingredients: newIngredients_array,
+                directions:newDirections_array,
+                imageURL: newImage
+            })
+        }).then(res => res.json())
+            .then(data => console.log(data));
+    }
+    makeRecipe();
+    location.reload();
+    create_recipe.style.visibility = "hidden";
+    creating = false;
+}
 
 
-search();
 function search()
 {
     searchbar.addEventListener('keyup', (e) => {
@@ -295,6 +378,7 @@ function search()
                 if(filteredRecipes != [])
                 {
                     display_area.innerHTML = "";
+                    display_area.append(recipe_template);
                     displayPersonalRecipes(filteredRecipes);
                 }
                 console.log(filteredRecipes);
@@ -310,6 +394,7 @@ function search()
                 if(filteredRecipes != [])
                 {
                     display_area.innerHTML = "";
+                    display_area.append(recipe_template);
                     displayPersonalRecipes(filteredRecipes);
                 }
            

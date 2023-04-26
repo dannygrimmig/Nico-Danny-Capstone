@@ -46,7 +46,7 @@
                     </div>
 
                     <div id = "button3">
-                        <button id = "create" onclick = "">Create</button>
+                        <button id = "create" onclick = "openCreateRecipePage()">Create</button>
                     </div>
 
                 </div>
@@ -54,7 +54,41 @@
             </div>
 
             <div id = "display-recipes" class = "borders">  <!--Either personal or public-->
-             
+                    <div id = "create_recipe" class="popup_recipe">
+                        <div class="leftSide">
+                            <div id = "photo_input-div" class="photo">
+                                <img id = "added_picture" src="https://htmlcolorcodes.com/assets/images/colors/white-color-solid-background-1920x1080.png" alt = "Drag and Drop Photos Here">
+                                
+                                <p>Type Image URL Here:<span><input id = "added_img" type="text"></span></p>
+                                <input id = "getFile"type="file" class="file" accept="image/jpeg, image/png, image/jpg">
+                            </div>
+                            <div class="description">
+                                <div class="dishname">
+                                    <p>Dishname:<span> <input id = "dish_input" type="text"></span></p>
+                                </div>
+                                <div class="chef">
+                                    <p>Chef: <span><input id = "chef_input" type="text"></span></p> 
+                                </div>
+
+                                <div id = "createButton" onclick="createRecipe()">
+                                   <button>CREATE</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightSide">
+                            <div class="ingre_container">
+                                <h2 class="ingredients_header">INGREDIENTS</h2>
+                                <div class="serving">
+                                    <p>Serving size:<span> <input id = "serving_input" type="text"></span></p> 
+                                </div>
+                                <p class="ingredients"><textarea id="ingredients_input" cols="40" rows="2000" placeholder="Enter your ingredients here"></textarea></p>
+                            </div>
+                            <div class="direct_container">
+                                <h2 class="directions_header">PREPARATION</h2>
+                                <p class="directions"><textarea id="directions_input" cols="50" rows="2000" placeholder="Enter Your recipe directions here"></textarea></p>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </body>
