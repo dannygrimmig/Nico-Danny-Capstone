@@ -39,12 +39,9 @@ function display_user()
     request.send();
     request.onload = function(){
         var user = request.response;
-        console.log(user.username);
         let name = document.getElementById("name");
         name.innerHTML = user.username;
     }
-
-  
 }
 
 
@@ -110,7 +107,10 @@ function getFeedRecipes()
     request.send();
     request.onload = function(){
         all_recipes = request.response;
-        displayPersonalRecipes(all_recipes);
+        console.log("All", all_recipes);
+        let others_recipes = all_recipes.filter(recipe => recipe.chef != "DannyG"); //CHANGE DannyG to Username
+        console.log("Others", others_recipes);
+        displayPersonalRecipes(all_recipes); //Change to others_recipes
     }
 }
 
@@ -146,6 +146,19 @@ function displayPersonalRecipes(recipes_array)
 
         button.innerHTML = dishName;
         recipeDiv.appendChild(button);
+
+        // IF PERSONAL RECIPES
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "DELETE";
+        deleteBtn.className = "deleteBtn";
+        deleteBtn.addEventListener("click", async function(){
+            var requestURL = 'http://localhost:3001/users/'+id+'/recipes/delete/' + recipes_array[x]._id;
+            const data = await fetch(requestURL, {method: "DELETE"})
+            .then(res => res.json());
+        })
+        button.appendChild(deleteBtn);
+        // END IF PERSONAL RECIPES
+
         display_area.appendChild(recipeDiv);
     }
 }
