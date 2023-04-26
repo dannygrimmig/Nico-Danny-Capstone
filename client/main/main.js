@@ -9,20 +9,18 @@ let body = document.getElementById("body");
 let html = document.getElementById("html");
 let searchbar = document.getElementById("search-item");
 let initial = true;
-let currentRecipe = "";
+let currentRecipe;
 
 let toggle_screen = "";
 let all_recipes = [];
 let personal_recipes = [];
 let newImage;
-let creating = false;
 let recipe_template = document.getElementById("create_recipe");
 
 
 display_user();
 search();
 setInterval(popup_open, 1);//Check if popup is open or closed
-
 
 //Gets opening screen
 if(initial)
@@ -150,14 +148,13 @@ function displayPersonalRecipes(recipes_array)
         recipeDiv.appendChild(button);
         display_area.appendChild(recipeDiv);
     }
-    console.log(chef,dishName,servingSize,directions_array,ingredients_array, image); 
 }
 
 
 //If a recipes is clicked it is displayed in a popup screen that this function creates
 function display_recipe(chef, dishName, servingSize, directions_array, ingredients_array,image) //, directions_array ,ingredients_array,
 {
-    if(currentRecipe === "")
+    if(currentRecipe === undefined)
     {
         let popup = document.createElement('div');
         popup.classList.add("popup_recipe");
@@ -264,35 +261,47 @@ function display_recipe(chef, dishName, servingSize, directions_array, ingredien
 function hideRecipe()
 {
     currentRecipe.style.visibility = "hidden";
-    currentRecipe = "";
+    currentRecipe = undefined;
 }
 
                         //find (Query selector)
 function popup_open()  //Look at level of depth (onclick element target) Look at whole tree (Check for model or child of model)
 {
-    if(currentRecipe != "" || creating)
+    if(currentRecipe != undefined)
     {
         disableScroll();
-        
-        if(!creating)
-        {
-            body.setAttribute("onclick",  "hideRecipe()");
-        }
-
+        body.setAttribute("onclick",  "hideRecipe()");
+      
+       
     }
     else
     {
        enableScroll();
-
        body.removeAttribute("onclick",  "hideRecipe()");
     }
 }
 
 function openCreateRecipePage()
 {
-    create_recipe.style.visibility = "visible";
     listenforphotos();
-    creating = true;
+    setTimeout(() => {
+
+        if(isNotHidden(recipe_template))
+        {
+            document.addEventListener('click', function handleClickOutsideBox(event) {
+                // 👇️ the element the user clicked
+                if(!recipe_template.contains(event.target))
+                {
+                        recipe_template.style.visibility = "hidden";
+                    document.removeEventListener("click", handleClickOutsideBox);
+                }
+            });
+        }
+
+    }, 1);
+
+    recipe_template.style.visibility = "visible";
+    disableScroll();
 }
 
 function listenforphotos()
@@ -321,6 +330,7 @@ function listenforphotos()
 
 function createRecipe()
 {
+    
     let newChef =  document.getElementById("chef_input").value;                  
     let newDishName = document.getElementById("dish_input").value;
     let newServingSize = document.getElementById("serving_input").value;
@@ -334,33 +344,44 @@ function createRecipe()
     let newDisplayImage = document.getElementById("added_picture");
 
     let newImage = document.getElementById("added_img").value;
-
+    
     //let newImage = newDisplayImage.src;
-    console.log(newDishName);
-  
-    const makeRecipe = async () =>
+    
+    if(newDishName.length === 0 || newServingSize.length === 0 || newDirections_array[0].length === 0
+        || newIngredients_array[0].length === 0 || newImage.length === 0)
     {
-        let queryURL = "http://localhost:3001/users/"+id+"/recipes/new";
-        console.log("queryURL:",queryURL);
-        const recipe = await fetch(queryURL,{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                dishName: newDishName,
-                servingSize: newServingSize,
-                ingredients: newIngredients_array,
-                directions:newDirections_array,
-                imageURL: newImage
-            })
-        }).then(res => res.json())
-            .then(data => console.log(data));
+        console.log(newDishName.length === 0);
+        console.log(newServingSize.length === 0);
+        console.log(newDirections_array[0].length === 0);
+        console.log(newIngredients_array[0].length === 0);
+        console.log(newImage.length === 0);
     }
-    makeRecipe();
-    location.reload();
-    create_recipe.style.visibility = "hidden";
-    creating = false;
+    else
+    {
+        const makeRecipe = async () =>
+        {
+            let queryURL = "http://localhost:3001/users/"+id+"/recipes/new";
+            const recipe = await fetch(queryURL,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    dishName: newDishName,
+                    servingSize: newServingSize,
+                    ingredients: newIngredients_array,
+                    directions:newDirections_array,
+                    imageURL: newImage
+                })
+            }).then(res => res.json())
+                .then(data => console.log(data));
+        }
+        makeRecipe();
+        location.reload();
+        recipe_template.style.visibility = "hidden";
+        enableScroll();
+        //invalid
+    }
 }
 
 
@@ -383,7 +404,6 @@ function search()
                     display_area.append(recipe_template);
                     displayPersonalRecipes(filteredRecipes);
                 }
-                console.log(filteredRecipes);
             }
             else //if in feed
             {
@@ -430,4 +450,15 @@ function disableScroll() {
 function enableScroll() 
 {
      window.onscroll = function() {};
+}
+
+function isInPage(node) {
+    return node === document.body ? false : document.body.contains(node);
+  }
+
+
+  function isNotHidden(el) 
+  {
+    var style = window.getComputedStyle(el);
+    return (style.visibility != 'hidden')
 }
