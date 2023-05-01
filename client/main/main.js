@@ -148,8 +148,12 @@ function displayPersonalRecipes(recipes_array)
         recipeDiv.appendChild(button);
 
         // IF PERSONAL RECIPES
-        let deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "DELETE";
+        let deleteBtn = document.createElement("div");
+        let deleteIcon = document.createElement("img");
+
+        deleteIcon.src = "./icons/trash.svg";
+        deleteBtn.appendChild(deleteIcon);
+
         deleteBtn.className = "deleteBtn";
         deleteBtn.addEventListener("click", async function(){
             var requestURL = 'http://localhost:3001/users/'+id+'/recipes/delete/' + recipes_array[x]._id;
