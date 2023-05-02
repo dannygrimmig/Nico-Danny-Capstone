@@ -107,10 +107,10 @@ function getFeedRecipes()
     request.send();
     request.onload = function(){
         all_recipes = request.response;
-        console.log("All", all_recipes);
-        let others_recipes = all_recipes.filter(recipe => recipe.chef != "DannyG"); //CHANGE DannyG to Username
-        console.log("Others", others_recipes);
-        displayPersonalRecipes(all_recipes); //Change to others_recipes
+        let title = document.getElementById("name");
+        let others_recipes = all_recipes.filter(recipe => recipe.chef != title.innerHTML); //CHANGE DannyG to Username
+        console.log(title.innerHTML);
+        displayPersonalRecipes(others_recipes); //Change to others_recipes
     }
 }
 
@@ -136,6 +136,7 @@ function displayPersonalRecipes(recipes_array)
 
         let recipeDiv = document.createElement('div'); //Add Dishname
         recipeDiv.classList.add("recipe");
+        // recipeDiv.id = "recipeDiv";
 
         let button = document.createElement('button');
         button.setAttribute("onclick", "display_recipe(\""+ chef + "\",\""+ dishName + "\",\""+ servingSize + "\",\""+ directions_array + "\",\""+ ingredients_array + "\",\""+ image + "\")"); //,\""+ directions_array + "\",\""+ ingredients_array + "\"
@@ -159,8 +160,10 @@ function displayPersonalRecipes(recipes_array)
             var requestURL = 'http://localhost:3001/users/'+id+'/recipes/delete/' + recipes_array[x]._id;
             const data = await fetch(requestURL, {method: "DELETE"})
             .then(res => res.json());
+
+            location.reload();
         })
-        button.appendChild(deleteBtn);
+        recipeDiv.appendChild(deleteBtn);
         // END IF PERSONAL RECIPES
 
         display_area.appendChild(recipeDiv);
@@ -317,6 +320,9 @@ function openCreateRecipePage()
 
     }, 1);
 
+    //set Chef Name
+    let header = document.getElementById("name");
+    document.getElementById("chefTitle").innerHTML = "Chef: " + header.innerHTML;
     recipe_template.style.visibility = "visible";
     disableScroll();
 }
@@ -328,27 +334,43 @@ function listenforphotos()
     let imgURL = ""
 
    
-    document.addEventListener("dragover", function(event) {
-        event.preventDefault();
-      });
+    // document.addEventListener("dragover", function(event) {
+    //     event.preventDefault();
+    //   });
 
-    inputDiv.addEventListener("drop", (e) => 
-    {
-        e.preventDefault()
-        const files = e.dataTransfer.files
-        if (files[0].type.match("image"))
+    // inputDiv.addEventListener("drop", (e) => 
+    // {
+    //     e.preventDefault()
+    //     const files = e.dataTransfer.files
+    //     if (files[0].type.match("image"))
+    //     {
+    //         const newImage = files[0];
+    //         imgURL = URL.createObjectURL(newImage);
+    //         displayImage.setAttribute("src", imgURL);
+    //     }
+    // })
+
+
+    //Listen for photo url that is valid to display photo
+    let urlbar = document.getElementById("added_img");
+
+
+    urlbar.addEventListener('keyup', (e) => {
+
+        let url = document.getElementById("added_img").value;
+        if( isValidUrl(url))
         {
-            const newImage = files[0];
-            imgURL = URL.createObjectURL(newImage);
-            displayImage.setAttribute("src", imgURL);
+            displayImage.setAttribute("src",url );
         }
-    })
+   
+
+    });
 }
 
 function createRecipe()
 {
     
-    let newChef =  document.getElementById("chef_input").value;                  
+    // let newChef =  document.getElementById("chef_input").value;                  
     let newDishName = document.getElementById("dish_input").value;
     let newServingSize = document.getElementById("serving_input").value;
     
@@ -362,7 +384,7 @@ function createRecipe()
 
     let newImage = document.getElementById("added_img").value;
     
-    //let newImage = newDisplayImage.src;
+    
     
     if(newDishName.length === 0 || newServingSize.length === 0 || newDirections_array[0].length === 0
         || newIngredients_array[0].length === 0 || newImage.length === 0)
@@ -479,3 +501,12 @@ function isInPage(node) {
     var style = window.getComputedStyle(el);
     return (style.visibility != 'hidden')
 }
+
+function isValidUrl(string) {
+    try {
+      new URL(string);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }

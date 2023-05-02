@@ -1,7 +1,7 @@
 console.log("%c JavaScript","color:steelblue; font-size: 24px; text-shadow: 2px 2px black");
 
 const API_BASE = "http://localhost:3001";
-const PROFILE_BASE = "http://127.0.0.1:5502/client/main/main.html";
+const PROFILE_BASE = "http://127.0.0.1:5500/Nico-Danny-Capstone/client/main/main.html";
 
 let login = true;
 
