@@ -5,6 +5,7 @@
 }
 a{
     text-decoration: none;
+    color: black;
 }
 body{
     font-family: 'Poppins', sans-serif;
@@ -60,14 +61,14 @@ body{
     cursor: pointer;
 }
 .nav .chunk.center{
-    background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_2_150x@2x.png?v=1675103754");
+    /* background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_2_150x@2x.png?v=1675103754"); */
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
-.nav .chunk.center.transparent{
-    background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_White_2_150x@2x.png?v=1675103768");
-}
+/* .nav .chunk.center.transparent{
+    background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_White_2_150x@2x.png?v=1675103768"); 
+} */
 .nav .chunk.right{
     display: flex;
     gap: 5px;
@@ -214,8 +215,8 @@ body{
 }
 .flex .right{
     flex: 1;
-    background-image: url("https://media.tenor.com/1MXzVIbC7GgAAAAd/tiger-woods-celebrating.gif");
+    background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/Colgate_University_Seal_2018.svg/1200px-Colgate_University_Seal_2018.svg.png");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:contain;
 }
