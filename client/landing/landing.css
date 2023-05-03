@@ -1,0 +1,221 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-weight: lighter;
+}
+a{
+    text-decoration: none;
+}
+body{
+    font-family: 'Poppins', sans-serif;
+    
+    width: 100%;
+}
+.shipping{
+    background-color: rgb(18, 54, 83);
+    width: 100%;
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+}
+.nav{
+    background-color: whitesmoke;
+    border-bottom: 1px solid black;
+    height: 100px;
+    position: sticky;
+    top: 0;
+    padding: 10px 50px;
+
+    display: flex;
+    justify-content: space-between;
+    transition: all .5s;
+    color: black;
+}
+.nav a{
+    color: black;
+}
+.nav.transparent{
+    background-color: transparent;
+    border: none;
+    color: whitesmoke;
+}
+.nav.transparent a{
+    color: white;
+}
+.nav .chunk{
+    padding: 10px;
+    width: 250px;
+}
+.nav .chunk.left{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-transform: uppercase;
+}
+.nav .chunk.left h3{
+    cursor: pointer;
+}
+.nav .chunk.center{
+    background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_2_150x@2x.png?v=1675103754");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.nav .chunk.center.transparent{
+    background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_White_2_150x@2x.png?v=1675103768");
+}
+.nav .chunk.right{
+    display: flex;
+    gap: 5px;
+    justify-content: right;
+    align-items: center;
+}
+.nav .chunk.right h3{
+    border: 1px solid black;
+    padding: 10px 25px;
+    border-radius: 25px;
+    height: 25px;
+    width: 525x;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.nav .chunk.right h3:hover{
+    transform: scale(1.1);
+    background-color: steelblue;
+}
+.nav .chunk.right.transparent h3{
+    border: 1px solid white;
+}
+
+.hero{
+    background-image: url("https://media4.giphy.com/media/Xs0QhkJK9ahkSGqz9F/giphy.gif");
+    background-position: center;
+    background-size: cover;
+    margin: -120px 0 0 0;
+    height: 640px;
+
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-weight: lighter;
+
+
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hero h1{
+    font-size: 40px;
+}
+.hero p{
+    background-color: whitesmoke;
+    border: 1px solid black;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 15px 40px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.hero p:hover{
+    background-color: transparent;
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+}
+
+.community{
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+}
+.community .text{
+    width: 500px;
+    text-align: center;
+}
+.community .text h1{
+    padding: 20px;
+}
+.community .text p{
+    padding: 10px;
+}
+.community .text .underline{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.community .text .underline:hover{
+    text-decoration: none;
+}
+
+.shopGrid{
+    background-color: gray;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.shopGrid .chunk{
+    flex: 2;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+
+    transition: all 0.25s;
+    cursor: pointer;
+}
+.shopGrid .chunk:hover{
+    flex: 3;
+}
+.shopGrid .chunk.left{
+    background-color: lightgray;
+    background-image: url("https://www.colgate.edu/sites/default/files/styles/optimized/public/profile/cropped_small3_0.png?itok=6EuoA9ss");
+    background-position: center;
+    background-size: cover;
+
+}
+.shopGrid .chunk.center{
+    background-color: gray;
+    background-image: url("https://media.licdn.com/dms/image/C4D03AQFpN82EU0xtMw/profile-displayphoto-shrink_400_400/0/1648747359560?e=1688601600&v=beta&t=4LLyKgLS5jBxMn5upEJxdUojFuw1crO2k3Bo3lvYoao");
+    background-position: center;
+    background-size: cover;
+}
+.shopGrid .chunk.right{
+    background-color: steelblue;
+    background-image: url("https://media.licdn.com/dms/image/C4E03AQEvIDKbiaAsYQ/profile-displayphoto-shrink_400_400/0/1610655751698?e=1688601600&v=beta&t=sKflsjsyqVsaDpQJFs1BepIkzzNcrlmO6MLSBV9LM68");
+    background-position: center;
+    background-size: cover;
+}
+.flex{
+    height: 600px;
+    background-color: whitesmoke;
+    display: flex;
+}
+.flex .left{
+    flex: 1;
+    background-color: whitesmoke;
+
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.flex .left p{
+    margin: 25%;
+    font-size: 30px;
+}
+.flex .right{
+    flex: 1;
+    background-image: url("https://media.tenor.com/1MXzVIbC7GgAAAAd/tiger-woods-celebrating.gif");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
