@@ -16,6 +16,7 @@ let all_recipes = [];
 let personal_recipes = [];
 let newImage;
 let recipe_template = document.getElementById("create_recipe");
+const LOGIN_BASE = "http://127.0.0.1:5500/Nico-Danny-Capstone/client/login/login.html";
 
 
 display_user();
@@ -29,6 +30,12 @@ if(initial)
     getPersonalRecipes();
 }
 
+
+//Signout
+function sign_out()
+{
+    window.location.assign(LOGIN_BASE);
+}
 //Displays the username
 function display_user()
 {
@@ -276,11 +283,14 @@ function display_recipe(chef, dishName, servingSize, directions_array, ingredien
 
         currentRecipe = popup;
     }
+
+    cover.style.visibility = "visible";
 }
 
 function hideRecipe()
 {
     currentRecipe.style.visibility = "hidden";
+    cover.style.visibility = "hidden";
     currentRecipe = undefined;
 }
 
@@ -312,6 +322,7 @@ function openCreateRecipePage()
                 // 👇️ the element the user clicked
                 if(!recipe_template.contains(event.target))
                 {
+                    cover.style.visibility = "hidden";
                         recipe_template.style.visibility = "hidden";
                     document.removeEventListener("click", handleClickOutsideBox);
                 }
@@ -323,8 +334,10 @@ function openCreateRecipePage()
     //set Chef Name
     let header = document.getElementById("name");
     document.getElementById("chefTitle").innerHTML = "Chef: " + header.innerHTML;
-    recipe_template.style.visibility = "visible";
+
     disableScroll();
+    recipe_template.style.visibility = "visible";
+    cover.style.visibility = "visible";
 }
 
 function listenforphotos()
@@ -416,10 +429,10 @@ function createRecipe()
                 .then(data => console.log(data));
         }
         makeRecipe();
+
+        enableScroll();
         location.reload();
         recipe_template.style.visibility = "hidden";
-        enableScroll();
-        //invalid
     }
 }
 
