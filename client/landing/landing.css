@@ -93,7 +93,9 @@ body{
 }
 
 .hero{
-    background-image: url("https://media4.giphy.com/media/Xs0QhkJK9ahkSGqz9F/giphy.gif");
+    /* background-image: url("https://media4.giphy.com/media/Xs0QhkJK9ahkSGqz9F/giphy.gif"); */
+    /* background-image: url("https://media0.giphy.com/media/K4x1ZL36xWCf6/giphy.gif"); */
+    background-image: url("https://allears.net/wp-content/uploads/2020/11/pooh-eating-gif.gif");
     background-position: center;
     background-size: cover;
     margin: -120px 0 0 0;
@@ -206,11 +208,12 @@ body{
     background-color: whitesmoke;
 
     display: flex;
+    flex-direction: column;
     text-align: center;
     align-items: center;
+    justify-content: center;
 }
-.flex .left p{
-    margin: 25%;
+.flex .left{
     font-size: 30px;
 }
 .flex .right{
