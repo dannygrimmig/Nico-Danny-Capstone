@@ -18,6 +18,7 @@ let usernameInput = document.getElementById("username");
 let passwordInput = document.getElementById("password");
 let submitButton = document.getElementById("submit");
 
+let cover = document.getElementById("cover");
 
 // LOGIN VS. SIGNUP
 function logInDisplay(){
