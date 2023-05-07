@@ -32,10 +32,12 @@ let heroIndex = 0;
 let heroContainer = document.getElementById("hero");
 let heroArr = [
     "https://allears.net/wp-content/uploads/2020/11/pooh-eating-gif.gif",
+    "https://media0.giphy.com/media/KkLRkAnWA24SI/giphy.gif?cid=6c09b952243b8e3c8c70e9bbb62b6b50be25b0c20a994958&ep=v1_internal_gifs_gifId&rid=giphy.gif&ct=g",
     "https://media0.giphy.com/media/K4x1ZL36xWCf6/giphy.gif",
     "https://i.gifer.com/origin/a5/a5569cd8a6d090e462d4a67be54302f9.gif",
-    "https://media3.giphy.com/media/iZjoLdS1nwMRq/giphy.gif",
-    "https://media0.giphy.com/media/yZaInh5c9AUZHE0ee7/giphy-downsized.gif",
+    "https://media2.giphy.com/media/yWTrzwWVS9x1zHPIwT/giphy.gif",
+    "https://gifdb.com/images/high/ron-weasley-hungry-eating-tzf6maf4r9ow0ztc.gif",
+
 ]
 function heroImage(){
     heroIndex++;

@@ -16,7 +16,7 @@ body{
     background-color: rgb(18, 54, 83);
     width: 100%;
     color: whitesmoke;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -55,20 +55,21 @@ body{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 .nav .chunk.left h3{
     cursor: pointer;
 }
 .nav .chunk.center{
-    /* background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_2_150x@2x.png?v=1675103754"); */
+    background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/Colgate_University_Seal_2018.svg/1200px-Colgate_University_Seal_2018.svg.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
 }
-/* .nav .chunk.center.transparent{
-    background-image: url("https://cdn.shopify.com/s/files/1/0024/4350/9869/files/Logo_Transparent_White_2_150x@2x.png?v=1675103768"); 
-} */
+.nav .chunk.center.transparent{
+    background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/d/dc/Colgate_University_Seal_2018.svg/1200px-Colgate_University_Seal_2018.svg.png"); 
+    filter: brightness(100);
+}
 .nav .chunk.right{
     display: flex;
     gap: 5px;
@@ -102,7 +103,7 @@ body{
     height: 640px;
 
     color: whitesmoke;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: lighter;
 
 
