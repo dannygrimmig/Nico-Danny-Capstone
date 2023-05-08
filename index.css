@@ -247,7 +247,10 @@ body{
 
 @media (max-width: 425px) {
     .nav{
-        font-size: 5px;
+        font-size: 10px;
+    }
+    .nav .chunk.right h3{
+        padding: 8px;
     }
     .flex .left{
         overflow: hidden;
