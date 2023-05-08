@@ -84,6 +84,9 @@ body{
     width: 525x;
     cursor: pointer;
     transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .nav .chunk.right h3:hover{
     transform: scale(1.1);
@@ -241,3 +244,25 @@ body{
     height: 100px;
     width: 100px;
 }
+
+@media (max-width: 425px) {
+    .nav{
+        font-size: 8px;
+    }
+    .flex .left{
+        overflow: hidden;
+        visibility: collapse;
+        flex: 0;
+        margin-left: -50px;
+    }
+    .flex .right{
+        flex: 1;
+    }
+    .technologies{
+        overflow: hidden;
+    }
+    .technologies img{
+        height: 60px;
+        width: 60px;
+    }
+  }
