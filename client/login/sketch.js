@@ -8,7 +8,7 @@ let canvasLocation = document.getElementById("right");
 let iMax = 0;
 let jMax = 0;
 function preload() {
-  img = loadImage('tiger-woods-2001-masters-18th-hole-ross-wood.jpg');
+  img = loadImage("https://cdn.dribbble.com/users/2390791/screenshots/6889596/1_3_.jpg");
 }
 
 function setup() {
