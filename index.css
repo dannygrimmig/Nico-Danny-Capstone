@@ -261,6 +261,9 @@ body{
     .flex .right{
         flex: 1;
     }
+    .shopGrid{
+        height: 800px;
+    }
     .technologies{
         overflow: hidden;
     }
